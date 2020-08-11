@@ -8,17 +8,23 @@ import Loading from './../shared/Loading/Loading';
 import Nav from './../shared/Nav';
 import './Budget.css';
 import {connect} from 'react-redux';
+import requestUserData from '../../redux/userReducer';
 
 
 class Budget extends Component {
 
+  componentDidMount(){
+    this.props.requestUserData()
+  }
+
   render() {
     const {loading} = this.props.budget;
-    return (
+    const {firstName, lastName} = this.props.user;
+     return (
       <Background>
         {loading ? <Loading /> : null}
         <div className='budget-container'>
-          <Nav />
+          <Nav firstName={firstName} lastName={lastName}/>
           <div className='content-container'>
             <div className="purchases-container">
               <AddPurchase />
@@ -36,7 +42,10 @@ class Budget extends Component {
 }
 
 function mapStateToProps(state){
-  return {budget: state.budget}
+  return {
+    budget: state.budget,
+    user: state.user
+  }
 } 
 
-export default connect(mapStateToProps)(Budget);
+export default connect(mapStateToProps, {requestUserData})(Budget);
