@@ -8,11 +8,8 @@ import Loading from './../shared/Loading/Loading';
 import Nav from './../shared/Nav';
 import './Budget.css';
 import {connect} from 'react-redux';
-import requestUserData from './../../redux/userReducer';
-import requestBudgetData from './../../redux/budgetReducer';
-import addPurchase from './../../redux/budgetReducer';
-import removePurchase from './../../redux/budgetReducer';
-
+import {requestUserData} from './../../redux/userReducer';
+import {requestBudgetData, addPurchase, removePurchase} from './../../redux/budgetReducer';
 class Budget extends Component {
   componentDidMount(){
     this.props.requestUserData();
